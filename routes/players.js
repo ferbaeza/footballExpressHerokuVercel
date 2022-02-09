@@ -3,7 +3,7 @@ const app = express()
 const Player = require('../models/player');
 const router = express.Router();
 
-//Get all the players
+//Get all the players//
 router.get("/", async (req, res) => {
   try {
     const {position} =req.query;  

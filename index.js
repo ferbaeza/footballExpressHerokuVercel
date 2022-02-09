@@ -22,14 +22,15 @@ mongoose.connect(URL,connectionParams)
         console.error(`Error connecting to the database. \n${err}`);
     })
 
-app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/players", routesPlayers);
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.use(cors());
+
 
 //----------------------------------------------------//
 
