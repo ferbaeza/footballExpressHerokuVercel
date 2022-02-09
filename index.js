@@ -16,7 +16,7 @@ const connectionParams={
 }
 mongoose.connect(URL,connectionParams)
     .then( () => {
-        console.log('Connected to database ')
+        console.log('Connected to database ', port)
     })
     .catch( (err) => {
         console.error(`Error connecting to the database. \n${err}`);
@@ -27,8 +27,51 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/players", routesPlayers);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(methodOverride('_method'));
+
+//----------------------------------------------------
+
+app.listen(port, () => {
+    console.log("APP IS LISTENING ON PORT " + port)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------
+/*
+//--------Code to run in local--------//
 
 const positions = ['GK','DF','MF','FW'];
 const teams = ['REAL MADRID' , 'FC BARCELONA', 'PSG', 'BAYER MUNINCH', 'BORUSSIA DORTMUND'];
@@ -85,17 +128,6 @@ app.delete('/players/:id', async(req,res)=>{
     res.redirect('/');
 })
 
-//----------------------------------------------------
-app.listen(port, () => {
-    console.log("APP IS LISTENING ON PORT " + port)
-})
 
 
-showTimes = () => {
-    let result = '';
-    const times = process.env.TIMES || 5555;
-    for (i = 0; i < times; i++) {
-      result += i + ' ';
-    }
-    return result;
-  }
+*/

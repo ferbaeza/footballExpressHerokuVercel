@@ -3,17 +3,13 @@ const app = express()
 const Player = require('../models/player');
 const router = express.Router();
 
-const positions = ['GK','DF','MF','FW'];
-const teams = ['REAL MADRID' , 'FC BARCELONA', 'PSG', 'BAYER MUNINCH', 'BORUSSIA DORTMUND'];
-
-
 //Get all the players
 router.get("/", async (req, res) => {
   try {
-    const {pos} =req.params;  
+    const {position} =req.query;  
     const {team} =req.query;
-    if(pos){
-        let players = await Player.find( req.params.pos );
+    if(position){
+        let players = await Player.find({ position : position });
         res.status(200).json({
           status: 200,
           data: {players},
@@ -90,6 +86,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     let player = await Player.findByIdAndUpdate(req.params.id, req.body, {
+      runValidators: true,
       new: true,
     });
     if (player) {
