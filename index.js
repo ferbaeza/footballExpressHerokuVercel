@@ -9,6 +9,7 @@ const port= process.env.PORT || 3000; // heroku
 const Player = require('./models/player');
 const URL = require('./config/db');
 const routesPlayers = require('./routes/players');
+app.use(cors());
 
 const connectionParams={
     useNewUrlParser: true,
@@ -22,9 +23,14 @@ mongoose.connect(URL,connectionParams)
         console.error(`Error connecting to the database. \n${err}`);
     })
 
+
+app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/players", routesPlayers);
+app.use(cors());
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
