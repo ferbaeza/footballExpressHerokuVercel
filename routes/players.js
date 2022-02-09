@@ -41,9 +41,8 @@ router.get("/", async (req, res) => {
 //GET Player byID
 router.get("/:id", async (req, res) => {
   try {
-    let player = await Player.findOne({
-      _id: req.query.id,
-    });
+    const {id} = req.params;
+    let player = await Player.findOne({ _id:id });
     if (player) {
       res.status(200).json({
         status: 200,
@@ -61,6 +60,44 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+
+
+//Get Player by id with query
+
+router.get("/:id", async (req, res) => {
+  try {
+    const {id} = req.query;
+    if(id){
+      let player = await Player.findOne({ _id: id });
+      if (player) {
+        res.status(200).json({
+          status: 200,
+          data: player,
+        });
+      }
+      res.status(400).json({
+        status: 400,
+        message: "IdPlayer post found",
+      });
+  
+    }else{
+      let players = await Player.find();
+      res.status(200).json({
+          status: 200,
+          data: {players},
+        });
+
+    }  
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+});
+
+
+
 
 //api to create a new player
 router.post("/", async (req, res) => {
