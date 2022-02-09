@@ -10,10 +10,10 @@ const teams = ['REAL MADRID' , 'FC BARCELONA', 'PSG', 'BAYER MUNINCH', 'BORUSSIA
 //Get all the players
 router.get("/", async (req, res) => {
   try {
-    const {pos} =req.query;  
+    const {pos} =req.params;  
     const {team} =req.query;
     if(pos){
-        let players = await Player.find({ position : pos});
+        let players = await Player.find( req.params.pos );
         res.status(200).json({
           status: 200,
           data: {players},
@@ -93,7 +93,8 @@ router.put("/:id", async (req, res) => {
       new: true,
     });
     if (player) {
-      res.status(200).json({
+        res.setHeader('Content-type', 'application/json')
+        res.status(200).json({
         status: 200,
         data: player,
       });
