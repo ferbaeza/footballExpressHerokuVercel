@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     let player = await Player.findOne({
-      _id: req.params.id,
+      _id: req.query.id,
     });
     if (player) {
       res.status(200).json({
