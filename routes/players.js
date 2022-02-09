@@ -38,7 +38,7 @@ router.get("/", async (req, res) => {
 });
 
 
-//GET Player byID
+///GET Player byID
 router.get("/:id", async (req, res) => {
   try {
     const {id} = req.params;
