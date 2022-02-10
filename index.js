@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
 const bodyParser = require('body-parser');
 //const path = require('path');
 const mongoose = require('mongoose'); //Mongodb connector
@@ -9,13 +10,6 @@ const Player = require('./models/player');
 const URL = require('./config/db');
 const routesPlayers = require('./routes/players');
 app.use(cors());
-const cors=require("cors");
-
-app.use(cors()); // Use this after the variable declaration///
-
-
-
-
 
 const connectionParams={
     useNewUrlParser: true,
@@ -29,12 +23,19 @@ mongoose.connect(URL,connectionParams)
         console.error(`Error connecting to the database. \n${err}`);
     })
 
+
+app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/players", routesPlayers);
-app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'));
+app.use(cors());
 
 
 //----------------------------------------------------//
