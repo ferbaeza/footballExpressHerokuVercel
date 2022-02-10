@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const cors = require("cors");
 const bodyParser = require('body-parser');
 //const path = require('path');
 const mongoose = require('mongoose'); //Mongodb connector
@@ -10,6 +9,18 @@ const Player = require('./models/player');
 const URL = require('./config/db');
 const routesPlayers = require('./routes/players');
 app.use(cors());
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
+
+
+
+
 
 const connectionParams={
     useNewUrlParser: true,
