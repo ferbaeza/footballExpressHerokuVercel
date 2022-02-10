@@ -38,7 +38,7 @@ app.use(methodOverride('_method'));
 app.use(cors());
 
 
-//----------------------------------------------------///
+//----------------------------------------------------//
 
 app.listen(port, () => {
     console.log("APP IS LISTENING ON PORT " + port)
