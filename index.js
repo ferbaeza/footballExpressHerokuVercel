@@ -11,7 +11,7 @@ const routesPlayers = require('./routes/players');
 app.use(cors());
 const cors=require("cors");
 
-app.use(cors()); // Use this after the variable declaration//
+app.use(cors()); // Use this after the variable declaration///
 
 
 
